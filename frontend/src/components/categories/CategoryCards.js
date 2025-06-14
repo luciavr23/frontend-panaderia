@@ -18,8 +18,8 @@ import {
   uploadProductImage,
   getSignature,
   deleteImageFromCloudinary,
-  CLOUDINARY_BASE_URL,
 } from "../../service/cloudinaryService";
+import {CLOUDINARY_BASE_URL} from "../../service/cloudinaryService";
 import ConfirmDialog from "../dialogs/ConfirmDialog";
 
 const CategoryCard = ({category, isAdmin, refreshCategories}) => {
@@ -99,7 +99,7 @@ const CategoryCard = ({category, isAdmin, refreshCategories}) => {
       <Box sx={{position: "relative", height: 220}}>
         <CardMedia
           component="img"
-          image={`${CLOUDINARY_BASE_URL}${category.imageUrl}`}
+          image={`${CLOUDINARY_BASE_URL}/${category.imageUrl}`}
           alt={category.name}
           sx={{
             height: "100%",
