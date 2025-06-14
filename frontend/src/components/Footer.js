@@ -50,9 +50,17 @@ const Footer = () => {
             <Link href="/sobre-nosotros" underline="hover" color="inherit">
               Sobre Nosotros
             </Link>
-            <Link href="/sobre-nosotros" underline="hover" color="inherit">
-              Contacto
-            </Link>
+            {bakeryInfo?.email ? (
+              <Link
+                href={`mailto:${bakeryInfo.email}`}
+                underline="hover"
+                color="inherit"
+              >
+                Contacto
+              </Link>
+            ) : (
+              <Typography color="text.secondary">Contacto</Typography>
+            )}
           </Box>
 
           <Box sx={{display: "flex", gap: 1}}>
