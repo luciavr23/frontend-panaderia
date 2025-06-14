@@ -1,12 +1,13 @@
-// Obtener horario de la panadería
+import {baseUrl} from "../utils/constants";
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+// Obtener horario de la panadería
 export async function getSchedule() {
   try {
-    const response = await fetch("/schedules");
+    const response = await fetch(`${baseUrl}/schedules`);
     if (!response.ok) throw new Error("Error al obtener el horario");
 
     const data = await response.json();
@@ -22,9 +23,9 @@ export async function getSchedule() {
   }
 }
 
-//actualizar horario de la panadería
+// Actualizar horario de la panadería
 export const updateSchedule = async (id, scheduleDTO, token) => {
-  const response = await fetch(`/schedules/${id}`, {
+  const response = await fetch(`${baseUrl}/schedules/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

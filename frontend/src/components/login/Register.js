@@ -17,6 +17,7 @@ import {
 import HomeIcon from "@mui/icons-material/Home";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
+import {baseUrl} from "../../utils/constants";
 import logo from "../../assets/logos/2.png";
 
 const inputFocusStyle = {
@@ -151,7 +152,7 @@ const Register = () => {
     const cleanPhone = formData.phone.trim() || null;
 
     try {
-      const response = await fetch("http://localhost:8080/users/register", {
+      const response = await fetch(`${baseUrl}/users/register`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({

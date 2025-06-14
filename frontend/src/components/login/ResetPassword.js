@@ -12,6 +12,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import {baseUrl} from "../../utils/constants";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import {useSearchParams, useNavigate} from "react-router-dom";
 
@@ -81,7 +82,7 @@ const ResetPassword = () => {
 
     setLoading(true);
     try {
-      const res = await fetch("/users/reset-password", {
+      const res = await fetch(`${baseUrl}/users/reset-password`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({token, newPassword: password}),

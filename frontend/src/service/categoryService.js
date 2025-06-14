@@ -1,3 +1,5 @@
+import {baseUrl} from "../utils/constants";
+
 // Obtener categorías paginadas
 export async function getAllCategories(
   page = 0,
@@ -5,27 +7,23 @@ export async function getAllCategories(
   direction = "asc"
 ) {
   try {
-    const url = `/categories?page=${page}&sortBy=${sortBy}&direction=${direction}`;
+    const url = `${baseUrl}/categories?page=${page}&sortBy=${sortBy}&direction=${direction}`;
     const response = await fetch(url);
 
     if (!response.ok) throw new Error("Error al obtener categorías paginadas");
-
-    return await response.json(); // {content, totalPages, ...}
+    return await response.json();
   } catch (error) {
     console.error("getCategories:", error);
     return {content: [], totalPages: 0};
   }
 }
 
-//Obtener todas las categorías
 // Obtener todas las categorías sin paginación
 export async function getAllCategoriesRaw() {
   try {
-    const response = await fetch("/categories/all");
-
+    const response = await fetch(`${baseUrl}/categories/all`);
     if (!response.ok) throw new Error("Error al obtener todas las categorías");
-
-    return await response.json(); // devuelve un array directamente
+    return await response.json();
   } catch (error) {
     console.error("getAllCategoriesRaw:", error);
     return [];
@@ -35,14 +33,13 @@ export async function getAllCategoriesRaw() {
 // Crear una nueva categoría
 export async function createCategory(category) {
   try {
-    const response = await fetch("/categories", {
+    const response = await fetch(`${baseUrl}/categories`, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(category),
     });
 
     if (!response.ok) throw new Error("Error al crear categoría");
-
     return await response.json();
   } catch (error) {
     console.error("createCategory:", error);
@@ -53,14 +50,13 @@ export async function createCategory(category) {
 // Actualizar una categoría existente
 export async function updateCategory(id, category) {
   try {
-    const response = await fetch(`/categories/${id}`, {
+    const response = await fetch(`${baseUrl}/categories/${id}`, {
       method: "PUT",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(category),
     });
 
     if (!response.ok) throw new Error("Error al actualizar categoría");
-
     return await response.json();
   } catch (error) {
     console.error("updateCategory:", error);
@@ -71,7 +67,7 @@ export async function updateCategory(id, category) {
 // Eliminar una categoría
 export async function deleteCategory(id) {
   try {
-    const response = await fetch(`/categories/${id}`, {
+    const response = await fetch(`${baseUrl}/categories/${id}`, {
       method: "DELETE",
     });
 

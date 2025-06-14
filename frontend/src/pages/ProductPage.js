@@ -26,7 +26,7 @@ import {AuthContext} from "../context/AuthContext";
 import {CLOUDINARY_BASE_URL} from "../service/cloudinaryService";
 import {useCart} from "../context/CartContext";
 import Snackbar from "@mui/material/Snackbar";
-
+import {baseUrl} from "../utils/constants";
 import EditProductModal from "../components/products/EditProductModal";
 import {getAllAllergens} from "../service/allergenService";
 import {updateProduct, deleteProduct} from "../service/productService";
@@ -114,7 +114,7 @@ const ProductPage = () => {
     };
   };
   useEffect(() => {
-    const socket = new SockJS("http://localhost:8080/ws");
+    const socket = new SockJS(`${baseUrl}/ws`);
     const client = new Client({
       webSocketFactory: () => socket,
       reconnectDelay: 5000,

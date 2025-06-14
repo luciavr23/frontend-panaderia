@@ -10,6 +10,7 @@ import {
   DialogActions,
   Alert,
 } from "@mui/material";
+import {baseUrl} from "../../utils/constants";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
@@ -47,7 +48,7 @@ const AdminSettings = ({open, onClose, type}) => {
     const loadBakeryInfo = async () => {
       if (type !== "profile" || !open) return;
       try {
-        const response = await fetch("/info");
+        const response = await fetch(`${baseUrl}/info`);
         if (!response.ok) throw new Error("Error al cargar los datos");
         const data = await response.json();
         setFormData((prev) => ({
@@ -175,7 +176,7 @@ const AdminSettings = ({open, onClose, type}) => {
           Authorization: `Bearer ${auth.token}`,
         };
 
-        await fetch(`/info/${formData.id}`, {
+        await fetch(`${baseUrl}/info/${formData.id}`, {
           method: "PUT",
           headers,
           body: JSON.stringify({
@@ -183,8 +184,8 @@ const AdminSettings = ({open, onClose, type}) => {
           }),
         });
 
-        const updatedUser = await fetch("/users/me", {headers}).then((res) =>
-          res.json()
+        const updatedUser = await fetch(`${baseUrl}/users/me`, {headers}).then(
+          (res) => res.json()
         );
         setAuth((prev) => ({...prev, user: updatedUser}));
 
@@ -201,7 +202,7 @@ const AdminSettings = ({open, onClose, type}) => {
           Authorization: `Bearer ${auth.token}`,
         };
 
-        await fetch(`/info/${formData.id}`, {
+        await fetch(`${baseUrl}/info/${formData.id}`, {
           method: "PUT",
           headers,
           body: JSON.stringify({

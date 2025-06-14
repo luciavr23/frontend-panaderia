@@ -1,9 +1,11 @@
-//Obtener reseñas aleatorias
+import {baseUrl} from "../utils/constants";
+
+// Obtener reseñas aleatorias
 export async function getReviews() {
   try {
-    const response = await fetch("/reviews/limited");
+    const response = await fetch(`${baseUrl}/reviews/limited`);
     if (!response.ok) throw new Error("Error al obtener reseñas");
-    return await response.json(); // ✅ aquí recibes la lista de ReviewDTO del back
+    return await response.json(); // ✅ lista de ReviewDTO
   } catch (error) {
     console.error("reviews:", error);
     return [];
@@ -13,7 +15,7 @@ export async function getReviews() {
 // Obtener todas las reseñas
 export async function getAllReviews() {
   try {
-    const response = await fetch("/reviews");
+    const response = await fetch(`${baseUrl}/reviews`);
     if (!response.ok) throw new Error("Error al obtener reseñas");
     return await response.json();
   } catch (error) {
@@ -25,7 +27,7 @@ export async function getAllReviews() {
 // Obtener valoración de un pedido concreto
 export async function getReviewByOrder(orderId) {
   try {
-    const response = await fetch(`/reviews/order/${orderId}`);
+    const response = await fetch(`${baseUrl}/reviews/order/${orderId}`);
     if (!response.ok) return null;
     return await response.json();
   } catch (error) {
@@ -34,10 +36,10 @@ export async function getReviewByOrder(orderId) {
   }
 }
 
-// Enviar nueva reseña (ahora acepta token)
+// Enviar nueva reseña
 export async function addReview(review, token) {
   try {
-    const response = await fetch("/reviews", {
+    const response = await fetch(`${baseUrl}/reviews`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -46,10 +48,7 @@ export async function addReview(review, token) {
       body: JSON.stringify(review),
     });
 
-    if (!response.ok) {
-      throw new Error("Error al enviar la reseña");
-    }
-
+    if (!response.ok) throw new Error("Error al enviar la reseña");
     return await response.json();
   } catch (error) {
     console.error("addReview:", error);

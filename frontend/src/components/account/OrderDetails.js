@@ -17,6 +17,7 @@ import {
   Snackbar,
   Alert,
 } from "@mui/material";
+import {baseUrl} from "../../utils/constants";
 import {
   CheckCircle as CheckCircleIcon,
   Cancel as CancelIcon,
@@ -57,7 +58,7 @@ const OrderDetails = ({order, onOrderUpdated}) => {
       console.log("Actualizando pedido", order.id, "a estado", nuevoEstado);
 
       const response = await fetch(
-        `/orders/${order.id}/status?status=${nuevoEstado}`,
+        `${baseUrl}/orders/${order.id}/status?status=${nuevoEstado}`,
         {
           method: "PUT",
           headers: {

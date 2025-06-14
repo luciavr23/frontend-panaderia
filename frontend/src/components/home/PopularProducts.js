@@ -12,7 +12,7 @@ import {
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import {getPopularProducts} from "../../service/productService";
-import {CLOUDINARY_BASE_URL} from "../../service/cloudinaryService";
+import {CLOUDINARY_BASE_URL} from "../../utils/constants";
 
 function PopularProducts() {
   const [products, setProducts] = useState([]);

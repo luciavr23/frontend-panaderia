@@ -22,6 +22,7 @@ import Slide from "@mui/material/Slide";
 import {useContext} from "react";
 import {AuthContext} from "../../context/AuthContext";
 import {getCurrentUser} from "../../service/userService";
+import {baseUrl} from "../../utils/constants";
 
 const SlideTransition = (props) => {
   return <Slide {...props} direction="left" />;
@@ -90,7 +91,7 @@ const Login = ({open, onClose}) => {
     }
 
     try {
-      const response = await fetch("http://localhost:8080/auth/login", {
+      const response = await fetch(`${baseUrl}/auth/login`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({email, password}),

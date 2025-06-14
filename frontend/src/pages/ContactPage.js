@@ -10,6 +10,7 @@ import {
   Switch,
   TextField,
 } from "@mui/material";
+import {baseUrl} from "../utils/constants";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
@@ -130,7 +131,7 @@ const ContactPage = () => {
 
     setIsSending(true);
     try {
-      await fetch("/info/contact", {
+      await fetch(`${baseUrl}/info/contact`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(form),

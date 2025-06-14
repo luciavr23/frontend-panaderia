@@ -1,7 +1,8 @@
-// hacer un pago
+import {baseUrl} from "../utils/constants";
 
+// Crear intento de pago
 export async function createPaymentIntent(amount, email, token) {
-  const response = await fetch("/payment/create-payment-intent", {
+  const response = await fetch(`${baseUrl}/payment/create-payment-intent`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -33,7 +34,7 @@ export async function confirmPaymentForExistingOrder(
   paymentIntentId,
   token
 ) {
-  const res = await fetch("/payment/for-existing-order", {
+  const res = await fetch(`${baseUrl}/payment/for-existing-order`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

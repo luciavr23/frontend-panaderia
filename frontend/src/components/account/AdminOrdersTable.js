@@ -19,6 +19,7 @@ import {
   TextField,
   CircularProgress,
 } from "@mui/material";
+import {baseUrl} from "../../utils/constants";
 import {webSocketService} from "../../service/WebSocketService";
 import {updateOrderStatus} from "../../service/orderService";
 import {useAuth} from "../../context/AuthContext";
@@ -81,7 +82,7 @@ const AdminOrdersTable = () => {
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:8080/orders/today", {
+      const response = await fetch(`${baseUrl}/orders/today`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",

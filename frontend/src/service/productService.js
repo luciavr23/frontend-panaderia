@@ -1,3 +1,6 @@
+import {baseUrl} from "../utils/constants";
+
+// Obtener productos disponibles
 export async function getAvailableProducts(
   page = 0,
   sortBy = "name",
@@ -6,20 +9,21 @@ export async function getAvailableProducts(
   search = ""
 ) {
   try {
-    let url = `/products/available?page=${page}&sortBy=${sortBy}&direction=${direction}`;
+    let url = `${baseUrl}/products/available?page=${page}&sortBy=${sortBy}&direction=${direction}`;
     if (categoryId !== null) url += `&categoryId=${categoryId}`;
     if (search) url += `&search=${encodeURIComponent(search)}`;
 
     const response = await fetch(url);
     if (!response.ok) throw new Error("Error al obtener productos disponibles");
 
-    return await response.json(); // Recibes Page<ProductDTO>
+    return await response.json();
   } catch (error) {
     console.error("getAvailableProducts:", error);
     return {content: [], totalPages: 0};
   }
 }
 
+// Obtener todos los productos
 export async function getAllProducts(
   page = 0,
   sortBy = "name",
@@ -28,14 +32,14 @@ export async function getAllProducts(
   search = ""
 ) {
   try {
-    let url = `/products?page=${page}&sortBy=${sortBy}&direction=${direction}`;
+    let url = `${baseUrl}/products?page=${page}&sortBy=${sortBy}&direction=${direction}`;
     if (categoryId !== null) url += `&categoryId=${categoryId}`;
     if (search) url += `&search=${encodeURIComponent(search)}`;
 
     const response = await fetch(url);
     if (!response.ok) throw new Error("Error al obtener todos los productos");
 
-    return await response.json(); // Recibes Page<ProductDTO>
+    return await response.json();
   } catch (error) {
     console.error("getAllProducts:", error);
     return {content: [], totalPages: 0};
@@ -45,7 +49,7 @@ export async function getAllProducts(
 // Obtener productos populares
 export async function getPopularProducts() {
   try {
-    const response = await fetch("/products/popular");
+    const response = await fetch(`${baseUrl}/products/popular`);
     if (!response.ok) throw new Error("Error al obtener productos populares");
     return await response.json();
   } catch (error) {
@@ -54,9 +58,10 @@ export async function getPopularProducts() {
   }
 }
 
+// Actualizar producto
 export async function updateProduct(id, product) {
   try {
-    const response = await fetch(`/products/${id}`, {
+    const response = await fetch(`${baseUrl}/products/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -65,7 +70,6 @@ export async function updateProduct(id, product) {
     });
 
     if (!response.ok) throw new Error("Error al actualizar el producto");
-
     return await response.json();
   } catch (error) {
     console.error("updateProduct:", error);
@@ -73,10 +77,12 @@ export async function updateProduct(id, product) {
   }
 }
 
+// Crear producto
 export async function createProduct(product) {
   try {
     const token = sessionStorage.getItem("token");
-    const response = await fetch("/products", {
+
+    const response = await fetch(`${baseUrl}/products`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -84,6 +90,7 @@ export async function createProduct(product) {
       },
       body: JSON.stringify(product),
     });
+
     if (!response.ok) throw new Error("Error al crear el producto");
     return await response.json();
   } catch (error) {
@@ -92,10 +99,12 @@ export async function createProduct(product) {
   }
 }
 
+// Eliminar producto
 export async function deleteProduct(id) {
   try {
     const token = sessionStorage.getItem("token");
-    const response = await fetch(`/products/${id}`, {
+
+    const response = await fetch(`${baseUrl}/products/${id}`, {
       method: "DELETE",
       headers: {
         ...(token ? {Authorization: `Bearer ${token}`} : {}),
@@ -103,7 +112,6 @@ export async function deleteProduct(id) {
     });
 
     if (!response.ok) throw new Error("Error al eliminar el producto");
-
     return true;
   } catch (error) {
     console.error("deleteProduct:", error);

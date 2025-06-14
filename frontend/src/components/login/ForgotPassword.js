@@ -11,6 +11,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import {baseUrl} from "../../utils/constants";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import {useNavigate} from "react-router-dom";
 
@@ -44,7 +45,7 @@ const ForgotPassword = () => {
     setError(null);
     setSuccess(null);
     try {
-      const res = await fetch("/users/forgot-password", {
+      const res = await fetch(`${baseUrl}/users/forgot-password`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({email}),

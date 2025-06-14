@@ -1,47 +1,48 @@
-//Obtener todos los pedidos de un usuario
+import {baseUrl} from "../utils/constants";
 
+// Obtener pedidos del usuario actual
 export async function getMyOrders(token) {
-  const res = await fetch("/orders/my", {
+  const res = await fetch(`${baseUrl}/orders/my`, {
     headers: {
       Authorization: token ? `Bearer ${token}` : undefined,
     },
   });
 
-  if (!res.ok) {
-    throw new Error("No se pudieron obtener tus pedidos");
-  }
-
+  if (!res.ok) throw new Error("No se pudieron obtener tus pedidos");
   return await res.json();
 }
-// Obtener los pedidos de hoy
+
+// Obtener pedidos de hoy
 export async function getTodayOrders(token) {
-  const res = await fetch("/orders/today", {
+  const res = await fetch(`${baseUrl}/orders/today`, {
     headers: {
       Authorization: token ? `Bearer ${token}` : undefined,
     },
   });
 
-  if (!res.ok) {
-    throw new Error("No se pudieron obtener los pedidos de hoy");
-  }
-
+  if (!res.ok) throw new Error("No se pudieron obtener los pedidos de hoy");
   return await res.json();
 }
 
-//Actualizar el estado de un pedido
+// Actualizar estado de un pedido
 export async function updateOrderStatus(orderId, status, token) {
-  const res = await fetch(`/orders/${orderId}/status?status=${status}`, {
-    method: "PUT",
-    headers: {
-      Authorization: token ? `Bearer ${token}` : undefined,
-    },
-  });
+  const res = await fetch(
+    `${baseUrl}/orders/${orderId}/status?status=${status}`,
+    {
+      method: "PUT",
+      headers: {
+        Authorization: token ? `Bearer ${token}` : undefined,
+      },
+    }
+  );
+
   if (!res.ok) throw new Error("No se pudo actualizar el estado del pedido");
   return await res.json();
 }
 
+// Crear un nuevo pedido
 export async function createOrder(order, token) {
-  const res = await fetch("/orders/payment", {
+  const res = await fetch(`${baseUrl}/orders/payment`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -49,11 +50,12 @@ export async function createOrder(order, token) {
     },
     body: JSON.stringify(order),
   });
+
   if (!res.ok) throw new Error("Could not create order");
   return await res.json();
 }
 
-// Crear un pedido con el ID del intento de pago
+// Crear pedido con intento de pago
 export async function createOrderWithPayment(cart, paymentIntentId, token) {
   const body = {
     products: cart.map((item) => ({
@@ -63,7 +65,7 @@ export async function createOrderWithPayment(cart, paymentIntentId, token) {
     paymentIntentId,
   };
 
-  const res = await fetch("/orders/payment", {
+  const res = await fetch(`${baseUrl}/orders/payment`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -80,18 +82,21 @@ export async function createOrderWithPayment(cart, paymentIntentId, token) {
   return await res.json();
 }
 
-// Obtener un pedido por ID
+// Obtener pedido por ID
 export const getOrderById = async (id, token) => {
-  const response = await fetch(`/orders/${id}`, {
-    headers: {Authorization: `Bearer ${token}`},
+  const response = await fetch(`${baseUrl}/orders/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
+
   if (!response.ok) throw new Error("No se pudo obtener el pedido");
   return await response.json();
 };
 
-//validar stock de productos
+// Validar stock
 export async function validateStock(cart, token) {
-  const res = await fetch("/products/validate-stock", {
+  const res = await fetch(`${baseUrl}/products/validate-stock`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -108,9 +113,9 @@ export async function validateStock(cart, token) {
   return true;
 }
 
-//Reenviar un ticket de pedido
+// Reenviar ticket
 export async function resendOrderTicket(orderId, token) {
-  const res = await fetch(`/orders/${orderId}/resend-ticket`, {
+  const res = await fetch(`${baseUrl}/orders/${orderId}/resend-ticket`, {
     method: "POST",
     headers: {
       Authorization: token ? `Bearer ${token}` : undefined,
@@ -132,23 +137,22 @@ export async function resendOrderTicket(orderId, token) {
   return await res.json();
 }
 
-// Obtener todos los pedidos de un usuario por ID
+// Obtener pedidos de un usuario por ID
 export async function getOrdersByUserId(userId, token) {
-  const res = await fetch(`/orders/user/${userId}`, {
+  const res = await fetch(`${baseUrl}/orders/user/${userId}`, {
     headers: {
       Authorization: token ? `Bearer ${token}` : undefined,
     },
   });
 
-  if (!res.ok) {
+  if (!res.ok)
     throw new Error("No se pudieron obtener los pedidos del usuario");
-  }
-
   return await res.json();
 }
-//Eliminar un pedido
+
+// Eliminar pedido
 export async function deleteOrder(orderId, token) {
-  const res = await fetch(`/orders/${orderId}`, {
+  const res = await fetch(`${baseUrl}/orders/${orderId}`, {
     method: "DELETE",
     headers: {
       Authorization: token ? `Bearer ${token}` : undefined,
