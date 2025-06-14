@@ -1,6 +1,5 @@
 import {
   baseUrl,
-  CLOUD_NAME,
   UPLOAD_PRESET_SIGNED,
   CLOUDINARY_UPLOAD_URL,
 } from "../utils/constants";
