@@ -23,7 +23,7 @@ import AllergenIcons from "../components/products/AllergenIcons";
 import {getAvailableProducts, getAllProducts} from "../service/productService";
 import {getAllCategories} from "../service/categoryService";
 import {AuthContext} from "../context/AuthContext";
-import {CLOUDINARY_BASE_URL} from "../service/cloudinaryService";
+import {CLOUDINARY_BASE_URL} from "../utils/constants";
 import {useCart} from "../context/CartContext";
 import Snackbar from "@mui/material/Snackbar";
 import {baseUrl} from "../utils/constants";
