@@ -4,9 +4,7 @@ import {
   UPLOAD_PRESET_SIGNED,
   CLOUDINARY_UPLOAD_URL,
 } from "../utils/constants";
-export const CLOUD_NAME = "dzcym3dh4";
 
-export const CLOUDINARY_BASE_URL = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload`;
 // Subida de imagen de PRODUCTO
 export const uploadProductImage = async (file, publicId, signatureData) => {
   const formData = new FormData();
