@@ -50,7 +50,7 @@ const Footer = () => {
             <Link href="/sobre-nosotros" underline="hover" color="inherit">
               Sobre Nosotros
             </Link>
-            <Link href="/contacto" underline="hover" color="inherit">
+            <Link href="/sobre-nosotros" underline="hover" color="inherit">
               Contacto
             </Link>
           </Box>
