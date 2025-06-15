@@ -191,7 +191,7 @@ const ProductPage = () => {
         const allImageUrls = allProductsData.flatMap((product) =>
           (product.images || [])
             .sort((a, b) => a.order - b.order)
-            .map((img) => `${CLOUDINARY_BASE_URL}${img.imageUrl}`)
+            .map((img) => `${CLOUDINARY_BASE_URL}/${img.imageUrl}`)
         );
 
         const allergens = await getAllAllergens();
