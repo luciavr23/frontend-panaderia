@@ -494,7 +494,7 @@ const ProductPage = () => {
                     >
                       <CardMedia
                         component="img"
-                        image={`${CLOUDINARY_BASE_URL}${
+                        image={`${CLOUDINARY_BASE_URL}/${
                           hoveredProductId === product.id && secondaryImage
                             ? secondaryImage
                             : primaryImage

@@ -134,7 +134,7 @@ function PopularProducts() {
               <CardMedia
                 component="img"
                 height={160}
-                image={`${CLOUDINARY_BASE_URL}${product.imageUrl}`}
+                image={`${CLOUDINARY_BASE_URL}/${product.imageUrl}`}
                 alt={product.name}
                 sx={{objectFit: "cover"}}
               />
