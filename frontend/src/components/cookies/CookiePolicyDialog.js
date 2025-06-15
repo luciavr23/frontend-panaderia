@@ -80,7 +80,7 @@ const CookiePolicyDialog = ({open, onClose}) => {
               fontWeight: "bold",
             }}
           >
-            correo@panaderia.com
+            infopanaderiana@gmail.com
           </a>
           .
         </Typography>
